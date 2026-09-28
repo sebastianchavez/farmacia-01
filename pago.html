@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmar pago · FarmaSalud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <div data-header></div>
+
+  <main class="flex-1">
+
+    <section class="bg-gradient-to-br from-primary-50 to-white">
+      <div class="max-w-7xl mx-auto px-4 py-10 reveal">
+        <p class="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Checkout</p>
+        <h1 class="mt-2 font-display text-3xl md:text-4xl text-primary-900">Confirmar pago</h1>
+        <p class="mt-2 text-ink/80">Completa los datos para finalizar tu pedido.</p>
+      </div>
+    </section>
+
+    <div id="sin-carrito" class="hidden max-w-md mx-auto px-4 py-16 text-center">
+      <span class="material-symbols-outlined text-6xl text-muted">shopping_cart</span>
+      <h2 class="mt-4 font-display text-2xl text-primary-900">Tu carrito está vacío</h2>
+      <a href="productos.html" class="btn-primary mt-6">Explorar productos</a>
+    </div>
+
+    <div id="sin-sesion" class="hidden max-w-md mx-auto px-4 py-16 text-center">
+      <h2 class="font-display text-2xl text-primary-900">Inicia sesión para continuar</h2>
+      <p class="mt-2 text-muted">Necesitamos tu cuenta para registrar el pedido.</p>
+      <a id="btn-login" href="login.html" class="btn-primary mt-6">Iniciar sesión</a>
+    </div>
+
+    <section id="checkout" class="hidden max-w-7xl mx-auto px-4 py-10 grid lg:grid-cols-[1fr_360px] gap-8">
+
+      <form id="pago-form" class="space-y-6">
+
+        <!-- Dirección -->
+        <fieldset class="bg-white border border-primary-100 rounded-2xl p-6">
+          <legend class="font-display text-xl text-primary-900 px-2">Dirección de envío</legend>
+          <div class="grid sm:grid-cols-2 gap-4 mt-2">
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Nombre completo</label>
+              <input name="nombre" required class="input-field mt-1" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Teléfono</label>
+              <input name="telefono" required type="tel" class="input-field mt-1" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Calle y número</label>
+              <input name="calle" required class="input-field mt-1" placeholder="Av. Salud 245, Depto 3" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Ciudad</label>
+              <input name="ciudad" required class="input-field mt-1" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Código postal</label>
+              <input name="cp" required class="input-field mt-1" />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Envío -->
+        <fieldset class="bg-white border border-primary-100 rounded-2xl p-6">
+          <legend class="font-display text-xl text-primary-900 px-2">Tipo de envío</legend>
+          <div class="mt-3 space-y-2">
+            <label class="flex items-start gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
+              <input type="radio" name="envio" value="estandar" data-costo="5" data-label="Estándar (3-5 días)" checked class="mt-1 text-primary focus:ring-primary" />
+              <div class="flex-1">
+                <p class="font-semibold">Estándar · 3-5 días hábiles</p>
+                <p class="text-xs text-muted">Envío por paquetería. Gratis en pedidos sobre $40.</p>
+              </div>
+              <span class="font-semibold text-primary">$5.00</span>
+            </label>
+            <label class="flex items-start gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
+              <input type="radio" name="envio" value="express" data-costo="12" data-label="Express (24-48h)" class="mt-1 text-primary focus:ring-primary" />
+              <div class="flex-1">
+                <p class="font-semibold">Express · 24-48h</p>
+                <p class="text-xs text-muted">Envío prioritario con seguimiento.</p>
+              </div>
+              <span class="font-semibold text-primary">$12.00</span>
+            </label>
+            <label class="flex items-start gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
+              <input type="radio" name="envio" value="tienda" data-costo="0" data-label="Recojo en tienda" class="mt-1 text-primary focus:ring-primary" />
+              <div class="flex-1">
+                <p class="font-semibold">Recojo en tienda</p>
+                <p class="text-xs text-muted">Av. Salud 245, Col. Centro. Horario de atención.</p>
+              </div>
+              <span class="font-semibold text-accent">Gratis</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Pago -->
+        <fieldset class="bg-white border border-primary-100 rounded-2xl p-6">
+          <legend class="font-display text-xl text-primary-900 px-2">Medio de pago</legend>
+          <div class="mt-3 space-y-2">
+            <label class="flex items-center gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
+              <input type="radio" name="pago" value="Tarjeta de Crédito" checked class="text-primary focus:ring-primary" />
+              <span class="material-symbols-outlined text-primary">credit_card</span>
+              <span class="flex-1 font-semibold">Tarjeta de crédito / débito</span>
+            </label>
+            <label class="flex items-center gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
+              <input type="radio" name="pago" value="Transferencia" class="text-primary focus:ring-primary" />
+              <span class="material-symbols-outlined text-primary">account_balance</span>
+              <span class="flex-1 font-semibold">Transferencia bancaria</span>
+            </label>
+            <label class="flex items-center gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
+              <input type="radio" name="pago" value="PayPal" class="text-primary focus:ring-primary" />
+              <span class="material-symbols-outlined text-primary">payments</span>
+              <span class="flex-1 font-semibold">PayPal</span>
+            </label>
+            <label class="flex items-center gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
+              <input type="radio" name="pago" value="Efectivo contra entrega" class="text-primary focus:ring-primary" />
+              <span class="material-symbols-outlined text-primary">request_quote</span>
+              <span class="flex-1 font-semibold">Efectivo contra entrega</span>
+            </label>
+          </div>
+
+          <div class="mt-4 grid sm:grid-cols-2 gap-4" id="tarjeta-extra">
+            <div class="sm:col-span-2">
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Número de tarjeta</label>
+              <input name="tarjeta_num" placeholder="0000 0000 0000 0000" class="input-field mt-1" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Vencimiento</label>
+              <input name="tarjeta_venc" placeholder="MM/AA" class="input-field mt-1" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">CVV</label>
+              <input name="tarjeta_cvv" placeholder="123" class="input-field mt-1" />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Receta -->
+        <fieldset id="receta-block" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-6">
+          <legend class="font-display text-xl text-amber-900 px-2 flex items-center gap-2">
+            <span class="material-symbols-outlined">description</span>
+            Receta médica
+          </legend>
+          <p class="text-sm text-amber-800 mt-1">Tu carrito incluye medicamentos que requieren receta. Adjunta una foto o PDF para que un farmacéutico la valide.</p>
+          <label for="receta-input" id="receta-dropzone" class="mt-4 border-2 border-dashed border-amber-300 rounded-xl p-6 text-center cursor-pointer hover:border-amber-500 transition block">
+            <span class="material-symbols-outlined text-amber-600 text-4xl">upload_file</span>
+            <p class="font-semibold text-amber-900 mt-2">Haz clic o arrastra tu receta aquí</p>
+            <p class="text-xs text-amber-700">JPG, PNG o PDF · máx. 5MB</p>
+            <input id="receta-input" type="file" accept="image/*,.pdf" class="hidden" />
+          </label>
+          <p id="receta-archivo" class="hidden mt-3 inline-flex items-center gap-2 text-sm bg-white border border-amber-200 rounded-lg px-3 py-2">
+            <span class="material-symbols-outlined text-amber-700">description</span>
+            <span id="receta-nombre" class="font-medium"></span>
+            <button type="button" id="receta-quitar" class="text-red-600 hover:underline text-xs">Quitar</button>
+          </p>
+        </fieldset>
+
+      </form>
+
+      <!-- Resumen -->
+      <aside class="bg-white border border-primary-100 rounded-2xl p-5 h-fit lg:sticky lg:top-24 space-y-4">
+        <h2 class="font-display text-xl text-primary-900">Tu pedido</h2>
+        <div id="pago-items" class="space-y-2 max-h-64 overflow-auto"></div>
+        <div class="border-t border-primary-100 pt-3 space-y-1 text-sm">
+          <div class="flex justify-between"><span class="text-muted">Subtotal</span><span id="p-subtotal" class="font-semibold"></span></div>
+          <div class="flex justify-between"><span class="text-muted">Envío</span><span id="p-envio" class="font-semibold"></span></div>
+        </div>
+        <div class="flex justify-between border-t border-primary-100 pt-3 text-lg">
+          <span class="font-semibold text-primary-900">Total</span>
+          <span id="p-total" class="font-bold text-primary"></span>
+        </div>
+        <button type="submit" form="pago-form" class="btn-primary w-full">
+          <span class="material-symbols-outlined">check_circle</span>
+          Confirmar pago
+        </button>
+        <p class="text-xs text-muted text-center">Al confirmar aceptas los <a href="terminos.html" class="underline">términos</a>.</p>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    const sesion = obtenerSesion();
+    const carrito = obtenerCarrito();
+
+    if (!carrito.length) {
+      document.getElementById("sin-carrito").classList.remove("hidden");
+    } else if (!sesion) {
+      const sb = document.getElementById("sin-sesion");
+      sb.classList.remove("hidden");
+      document.getElementById("btn-login").href = `login.html?redirect=pago.html`;
+    } else {
+      document.getElementById("checkout").classList.remove("hidden");
+
+      // Pre-rellenar dirección si el usuario tiene datos
+      const users = obtenerUsuarios();
+      const u = users.find(x => x.id === sesion.id);
+      if (u) {
+        const f = document.getElementById("pago-form");
+        f.nombre.value = u.nombre || "";
+        f.telefono.value = u.telefono || "";
+      }
+
+      // Bloque de receta si algún producto lo requiere
+      if (carritoRequiereReceta()) {
+        document.getElementById("receta-block").classList.remove("hidden");
+        const dz = document.getElementById("receta-dropzone");
+        const inp = document.getElementById("receta-input");
+        const archivo = document.getElementById("receta-archivo");
+        const nombreTxt = document.getElementById("receta-nombre");
+        const quitar = document.getElementById("receta-quitar");
+
+        function setArchivo(file) {
+          nombreTxt.textContent = file.name;
+          archivo.classList.remove("hidden");
+        }
+        inp.addEventListener("change", () => inp.files[0] && setArchivo(inp.files[0]));
+        dz.addEventListener("dragover", (e) => { e.preventDefault(); dz.classList.add("border-amber-500"); });
+        dz.addEventListener("dragleave", () => dz.classList.remove("border-amber-500"));
+        dz.addEventListener("drop", (e) => {
+          e.preventDefault();
+          dz.classList.remove("border-amber-500");
+          if (e.dataTransfer.files[0]) setArchivo(e.dataTransfer.files[0]);
+        });
+        quitar.addEventListener("click", () => { inp.value = ""; archivo.classList.add("hidden"); });
+      }
+    }
+
+    // Pintar resumen
+    function pintarResumen() {
+      const carrito = obtenerCarrito();
+      const items = document.getElementById("pago-items");
+      items.innerHTML = carrito.map(it => `
+        <div class="flex gap-3 text-sm">
+          <div class="w-12 h-12 rounded-lg overflow-hidden bg-primary-50 flex-shrink-0">
+            <img src="${it.imagen}" alt="" class="w-full h-full object-cover" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-medium text-primary-900 line-clamp-1">${it.nombre}</p>
+            <p class="text-xs text-muted">x${it.cantidad} · ${formatearPrecio(it.precio)}</p>
+          </div>
+          <span class="font-semibold">${formatearPrecio(it.precio * it.cantidad)}</span>
+        </div>
+      `).join("");
+
+      const subtotal = carrito.reduce((a, it) => a + it.precio * it.cantidad, 0);
+      const envioRadio = document.querySelector('input[name="envio"]:checked');
+      let envio = parseFloat(envioRadio.dataset.costo);
+      if (envioRadio.value === "estandar" && subtotal >= 40) envio = 0;
+      const total = subtotal + envio;
+
+      document.getElementById("p-subtotal").textContent = formatearPrecio(subtotal);
+      document.getElementById("p-envio").textContent = envio === 0 ? "Gratis" : formatearPrecio(envio);
+      document.getElementById("p-total").textContent = formatearPrecio(total);
+    }
+    pintarResumen();
+    document.querySelectorAll('input[name="envio"]').forEach(r => r.addEventListener("change", pintarResumen));
+
+    // Toggle campos de tarjeta
+    function toggleTarjeta() {
+      const metodo = document.querySelector('input[name="pago"]:checked').value;
+      document.getElementById("tarjeta-extra").classList.toggle("hidden", metodo !== "Tarjeta de Crédito");
+    }
+    document.querySelectorAll('input[name="pago"]').forEach(r => r.addEventListener("change", toggleTarjeta));
+
+    // Submit
+    document.getElementById("pago-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+
+      const envioRadio = document.querySelector('input[name="envio"]:checked');
+      const subtotal = carrito.reduce((a, it) => a + it.precio * it.cantidad, 0);
+      let envio = parseFloat(envioRadio.dataset.costo);
+      if (envioRadio.value === "estandar" && subtotal >= 40) envio = 0;
+
+      const requiereReceta = carritoRequiereReceta();
+      const recetaInput = document.getElementById("receta-input");
+      if (requiereReceta && (!recetaInput.files || !recetaInput.files[0])) {
+        toast("Adjunta tu receta médica para continuar.", "error");
+        return;
+      }
+
+      const ses = obtenerSesion();
+      const pedido = {
+        id: generarIdPedido(),
+        usuarioEmail: ses.email,
+        fecha: new Date().toISOString().slice(0, 10),
+        estado: "Procesando",
+        productos: carrito,
+        subtotal,
+        envio,
+        total: subtotal + envio,
+        tipoEnvio: envioRadio.dataset.label,
+        direccion: {
+          nombre: fd.get("nombre"),
+          telefono: fd.get("telefono"),
+          calle: fd.get("calle"),
+          ciudad: fd.get("ciudad"),
+          cp: fd.get("cp"),
+        },
+        metodoPago: fd.get("pago"),
+        requiereReceta,
+        recetaArchivo: requiereReceta ? recetaInput.files[0].name : null,
+      };
+
+      const pedidos = obtenerPedidos();
+      pedidos.push(pedido);
+      guardarPedidos(pedidos);
+      vaciarCarrito();
+
+      toast("Pedido confirmado", "success");
+      setTimeout(() => (window.location.href = `confirmacion.html?orden=${pedido.id}`), 500);
+    });
+  </script>
+</body>
+</html>

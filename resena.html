@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escribir reseña · FarmaSalud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <div data-header></div>
+
+  <main class="flex-1 max-w-2xl mx-auto w-full px-4 py-10">
+
+    <a href="javascript:history.back()" class="text-sm text-primary hover:underline inline-flex items-center gap-1 mb-4">
+      <span class="material-symbols-outlined text-base">arrow_back</span> Volver
+    </a>
+
+    <div id="alerta" class="hidden mb-6 p-4 rounded-xl"></div>
+
+    <div id="form-block" class="bg-white border border-primary-100 rounded-2xl p-6 md:p-8 reveal">
+      <div class="flex items-start gap-4 pb-5 border-b border-primary-100">
+        <div id="prod-img-wrap" class="w-20 h-20 rounded-xl overflow-hidden bg-primary-50 flex-shrink-0">
+          <img id="prod-img" alt="" class="w-full h-full object-cover" />
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-wider text-primary font-semibold">Escribir reseña</p>
+          <h1 id="prod-nombre" class="mt-1 font-display text-2xl text-primary-900"></h1>
+          <p id="prod-pedido" class="text-sm text-muted mt-1"></p>
+        </div>
+      </div>
+
+      <form id="resena-form" class="mt-6 space-y-5">
+        <div>
+          <label class="text-xs uppercase tracking-wider text-muted font-semibold">Calificación</label>
+          <div id="star-rating" class="star-rating mt-2 flex gap-1 text-3xl" data-value="0">
+            <button type="button" data-value="1"><span class="material-symbols-outlined">star</span></button>
+            <button type="button" data-value="2"><span class="material-symbols-outlined">star</span></button>
+            <button type="button" data-value="3"><span class="material-symbols-outlined">star</span></button>
+            <button type="button" data-value="4"><span class="material-symbols-outlined">star</span></button>
+            <button type="button" data-value="5"><span class="material-symbols-outlined">star</span></button>
+          </div>
+          <p id="rating-msg" class="text-xs text-muted mt-1">Selecciona una calificación</p>
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-wider text-muted font-semibold">Tu reseña</label>
+          <textarea name="comentario" required minlength="10" rows="5" class="input-field mt-1" placeholder="Cuéntanos tu experiencia con el producto..."></textarea>
+        </div>
+        <div class="flex items-center justify-between gap-3">
+          <a id="btn-volver" href="perfil.html" class="text-sm text-muted hover:underline">Cancelar</a>
+          <button type="submit" class="btn-primary">Enviar reseña</button>
+        </div>
+      </form>
+    </div>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    const sesion = obtenerSesion();
+    const productoId = obtenerQueryParam("producto");
+    const pedidoId = obtenerQueryParam("pedido");
+    const producto = productoId ? obtenerProducto(productoId) : null;
+    const alerta = document.getElementById("alerta");
+
+    function mostrarAlerta(tipo, msg) {
+      alerta.className = `mb-6 p-4 rounded-xl border ${tipo === "error" ? "bg-red-50 border-red-200 text-red-800" : "bg-amber-50 border-amber-200 text-amber-800"}`;
+      alerta.innerHTML = `<div class="flex gap-3"><span class="material-symbols-outlined">${tipo === "error" ? "error" : "info"}</span><p>${msg}</p></div>`;
+      alerta.classList.remove("hidden");
+    }
+
+    if (!sesion) {
+      mostrarAlerta("error", "Debes <a href='login.html' class='underline font-semibold'>iniciar sesión</a> para dejar una reseña.");
+      document.getElementById("form-block").classList.add("hidden");
+    } else if (!producto) {
+      mostrarAlerta("error", "Producto no encontrado.");
+      document.getElementById("form-block").classList.add("hidden");
+    } else if (!usuarioHaComprado(sesion.email, productoId)) {
+      mostrarAlerta("info", "Solo los clientes que han comprado y recibido este producto pueden dejar una reseña.");
+      document.getElementById("form-block").classList.add("hidden");
+    } else {
+      document.getElementById("prod-img").src = producto.imagen;
+      document.getElementById("prod-img").alt = producto.nombre;
+      document.getElementById("prod-nombre").textContent = producto.nombre;
+      document.getElementById("prod-pedido").textContent = pedidoId ? `Pedido #${pedidoId}` : "";
+
+      // Star rating interactivo
+      const sr = document.getElementById("star-rating");
+      const msg = document.getElementById("rating-msg");
+      sr.querySelectorAll("button").forEach(b => {
+        b.addEventListener("mouseenter", () => {
+          const v = parseInt(b.dataset.value);
+          sr.querySelectorAll("button").forEach((x, i) => x.classList.toggle("hovered", i < v));
+        });
+        b.addEventListener("mouseleave", () => {
+          sr.querySelectorAll("button").forEach(x => x.classList.remove("hovered"));
+        });
+        b.addEventListener("click", () => {
+          const v = parseInt(b.dataset.value);
+          sr.dataset.value = v;
+          sr.querySelectorAll("button").forEach((x, i) => x.classList.toggle("active", i < v));
+          msg.textContent = ["", "Muy malo", "Malo", "Regular", "Bueno", "Excelente"][v];
+        });
+      });
+
+      // Volver al pedido si viene de ahí
+      if (pedidoId) document.getElementById("btn-volver").href = `pedido.html?id=${pedidoId}`;
+      else if (obtenerQueryParam("redirect")) document.getElementById("btn-volver").href = obtenerQueryParam("redirect");
+
+      // Submit
+      document.getElementById("resena-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const rating = parseInt(sr.dataset.value);
+        if (rating < 1) {
+          msg.textContent = "Selecciona una calificación";
+          msg.className = "text-xs text-red-600 mt-1";
+          return;
+        }
+        const usuarios = obtenerUsuarios();
+        const u = usuarios.find(x => x.id === sesion.id);
+        const nueva = {
+          id: "r" + Date.now(),
+          productoId,
+          usuario: u ? u.nombre : sesion.nombre,
+          rating,
+          comentario: fd.get("comentario").trim(),
+          fecha: new Date().toISOString().slice(0, 10),
+        };
+        const arr = obtenerResenasStorage();
+        arr.push(nueva);
+        guardarResenas(arr);
+        toast("¡Gracias por tu reseña!", "success");
+        setTimeout(() => (window.location.href = `producto.html?id=${productoId}`), 600);
+      });
+    }
+  </script>
+</body>
+</html>

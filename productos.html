@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos · FarmaSalud</title>
+  <meta name="description" content="Catálogo de medicamentos, dermocosmética, vitaminas y más. Compra con receta digital y entrega a domicilio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <div data-header></div>
+
+  <main class="flex-1">
+
+    <!-- Page header -->
+    <section class="bg-gradient-to-br from-primary-50 to-white">
+      <div class="max-w-7xl mx-auto px-4 py-12 md:py-16 reveal">
+        <p class="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Catálogo</p>
+        <h1 class="mt-2 font-display text-3xl md:text-4xl text-primary-900">Nuestros productos</h1>
+        <p class="mt-2 text-ink/80">Medicamentos, dermocosmética, vitaminas y más con entrega a domicilio.</p>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[260px_1fr] gap-8">
+
+      <!-- Filtros -->
+      <aside class="lg:sticky lg:top-24 self-start bg-white rounded-2xl border border-primary-100 p-5 space-y-5">
+        <div>
+          <label class="text-xs uppercase tracking-wider text-muted font-semibold">Buscar</label>
+          <div class="relative mt-2">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted text-base">search</span>
+            <input id="f-buscar" type="text" placeholder="Ej. paracetamol" class="input-field pl-9" />
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-wider text-muted font-semibold">Categoría</p>
+          <div class="mt-2 space-y-1.5">
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="radio" name="cat" value="" checked class="text-primary focus:ring-primary" />
+              <span>Todas</span>
+            </label>
+            ${"" /* categorías se inyectan */}
+          </div>
+          <div id="f-cat" class="mt-1 space-y-1.5"></div>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-wider text-muted font-semibold">Receta</p>
+          <label class="mt-2 flex items-center gap-2 text-sm cursor-pointer">
+            <input id="f-receta" type="checkbox" class="text-primary focus:ring-primary rounded" />
+            <span>Solo con receta requerida</span>
+          </label>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-wider text-muted font-semibold">Precio máx.</p>
+          <input id="f-precio" type="range" min="0" max="60" step="1" value="60" class="w-full mt-2 accent-primary" />
+          <div class="flex justify-between text-xs text-muted mt-1">
+            <span>$0</span><span id="f-precio-val">$60</span>
+          </div>
+        </div>
+
+        <button id="f-limpiar" class="text-xs text-primary hover:underline">Limpiar filtros</button>
+      </aside>
+
+      <!-- Resultados -->
+      <div>
+        <div class="flex items-center justify-between mb-5">
+          <p id="resultados-info" class="text-sm text-muted"></p>
+          <div class="flex items-center gap-2 text-sm">
+            <label class="text-muted">Ordenar:</label>
+            <select id="orden" class="input-field !py-1.5 !px-3">
+              <option value="relevancia">Relevancia</option>
+              <option value="precio-asc">Menor precio</option>
+              <option value="precio-desc">Mayor precio</option>
+              <option value="nombre">Nombre A-Z</option>
+              <option value="rating">Mejor valorados</option>
+            </select>
+          </div>
+        </div>
+        <div id="productos-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <p id="vacio" class="hidden text-center text-muted py-12">No hay productos con esos filtros.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    // Pintar radios de categoría
+    document.getElementById("f-cat").innerHTML = CATEGORIAS.map(c => `
+      <label class="flex items-center gap-2 text-sm cursor-pointer">
+        <input type="radio" name="cat" value="${c.id}" class="text-primary focus:ring-primary" />
+        <span>${c.nombre}</span>
+      </label>
+    `).join("");
+
+    const catInicial = obtenerQueryParam("cat") || "";
+    if (catInicial) {
+      const r = document.querySelector(`input[name="cat"][value="${catInicial}"]`);
+      if (r) r.checked = true;
+    }
+
+    const grid = document.getElementById("productos-grid");
+    const vacio = document.getElementById("vacio");
+    const info = document.getElementById("resultados-info");
+    const precioInput = document.getElementById("f-precio");
+    const precioVal = document.getElementById("f-precio-val");
+    precioInput.addEventListener("input", () => {
+      precioVal.textContent = "$" + precioInput.value;
+      aplicarFiltros();
+    });
+
+    document.getElementById("f-buscar").addEventListener("input", aplicarFiltros);
+    document.querySelectorAll('input[name="cat"]').forEach(el => el.addEventListener("change", aplicarFiltros));
+    document.getElementById("f-receta").addEventListener("change", aplicarFiltros);
+    document.getElementById("orden").addEventListener("change", aplicarFiltros);
+    document.getElementById("f-limpiar").addEventListener("click", () => {
+      document.getElementById("f-buscar").value = "";
+      document.querySelector('input[name="cat"][value=""]').checked = true;
+      document.getElementById("f-receta").checked = false;
+      precioInput.value = 60;
+      precioVal.textContent = "$60";
+      document.getElementById("orden").value = "relevancia";
+      aplicarFiltros();
+    });
+
+    function aplicarFiltros() {
+      const q = document.getElementById("f-buscar").value.trim().toLowerCase();
+      const cat = document.querySelector('input[name="cat"]:checked').value;
+      const soloReceta = document.getElementById("f-receta").checked;
+      const max = parseFloat(precioInput.value);
+      const orden = document.getElementById("orden").value;
+
+      let lista = PRODUCTOS.filter(p => {
+        if (cat && p.categoria !== cat) return false;
+        if (soloReceta && !p.recetaRequerida) return false;
+        if (p.precio > max) return false;
+        if (q && !p.nombre.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      if (orden === "precio-asc") lista.sort((a, b) => a.precio - b.precio);
+      else if (orden === "precio-desc") lista.sort((a, b) => b.precio - a.precio);
+      else if (orden === "nombre") lista.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      else if (orden === "rating") lista.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+      if (lista.length === 0) {
+        grid.innerHTML = "";
+        vacio.classList.remove("hidden");
+      } else {
+        vacio.classList.add("hidden");
+        grid.innerHTML = lista.map(renderProductoCard).join("");
+      }
+      info.textContent = `${lista.length} producto${lista.length !== 1 ? "s" : ""} encontrado${lista.length !== 1 ? "s" : ""}`;
+    }
+
+    aplicarFiltros();
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar contraseña · FarmaSalud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col bg-primary-50/30">
+  <div data-header></div>
+  <main class="flex-1 grid place-items-center px-4 py-10">
+    <div class="w-full max-w-md reveal">
+      <div class="bg-white border border-primary-100 rounded-2xl p-6 md:p-8 shadow-soft text-center">
+        <span class="grid place-items-center mx-auto w-14 h-14 rounded-2xl bg-primary-100 text-primary">
+          <span class="material-symbols-outlined text-3xl">lock_reset</span>
+        </span>
+        <h1 class="mt-4 font-display text-2xl text-primary-900">Recuperar contraseña</h1>
+        <p class="text-sm text-muted mt-2">Ingresa tu correo y te enviaremos un enlace para crear una nueva contraseña.</p>
+
+        <form id="recuperar-form" class="mt-6 text-left space-y-4">
+          <div>
+            <label class="text-xs uppercase tracking-wider text-muted font-semibold">Correo electrónico</label>
+            <input name="email" type="email" required class="input-field mt-1" placeholder="tu@correo.com" />
+          </div>
+          <button type="submit" class="btn-primary w-full">Enviar enlace</button>
+        </form>
+
+        <p class="text-sm text-center text-muted mt-6">
+          <a href="login.html" class="text-primary hover:underline">← Volver a iniciar sesión</a>
+        </p>
+      </div>
+    </div>
+  </main>
+  <div data-footer></div>
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    document.getElementById("recuperar-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = new FormData(e.target).get("email");
+      const res = recuperarContrasena(email);
+      if (!res.ok) {
+        toast(res.error, "error");
+        return;
+      }
+      toast(res.mensaje, "success");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

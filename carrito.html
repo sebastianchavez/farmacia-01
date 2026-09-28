@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito · FarmaSalud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <div data-header></div>
+
+  <main class="flex-1">
+
+    <section class="bg-gradient-to-br from-primary-50 to-white">
+      <div class="max-w-7xl mx-auto px-4 py-10 reveal">
+        <p class="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Carrito</p>
+        <h1 class="mt-2 font-display text-3xl md:text-4xl text-primary-900">Tu carrito de compras</h1>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-10 grid lg:grid-cols-[1fr_360px] gap-8">
+
+      <div id="carrito-vacio" class="hidden bg-white border border-primary-100 rounded-2xl p-10 text-center">
+        <span class="material-symbols-outlined text-6xl text-muted">shopping_cart</span>
+        <h2 class="mt-4 font-display text-2xl text-primary-900">Tu carrito está vacío</h2>
+        <p class="mt-2 text-muted">Agrega productos desde nuestro catálogo.</p>
+        <a href="productos.html" class="btn-primary mt-6">Explorar productos</a>
+      </div>
+
+      <div id="carrito-lista" class="space-y-3"></div>
+
+      <aside id="carrito-resumen" class="hidden bg-white border border-primary-100 rounded-2xl p-5 h-fit lg:sticky lg:top-24 space-y-4">
+        <h2 class="font-display text-xl text-primary-900">Resumen</h2>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span class="text-muted">Subtotal</span><span id="r-subtotal" class="font-semibold"></span></div>
+          <div class="flex justify-between"><span class="text-muted">Envío</span><span id="r-envio" class="font-semibold"></span></div>
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-wider text-muted font-semibold">Cupón</label>
+          <div class="mt-2 flex gap-2">
+            <input id="cupon" placeholder="BIENVENIDO10" class="input-field flex-1 !py-2" />
+            <button id="aplicar-cupon" class="px-4 rounded-lg bg-primary-100 text-primary font-semibold text-sm hover:bg-primary-200">Aplicar</button>
+          </div>
+          <p id="cupon-msg" class="text-xs text-muted mt-1"></p>
+        </div>
+        <div class="flex justify-between border-t border-primary-100 pt-3 text-lg">
+          <span class="font-semibold text-primary-900">Total</span>
+          <span id="r-total" class="font-bold text-primary"></span>
+        </div>
+        <a href="pago.html" class="btn-primary w-full">
+          <span class="material-symbols-outlined">local_shipping</span>
+          Proceder al pago
+        </a>
+        <button id="vaciar" class="text-xs text-red-600 hover:underline w-full text-center">Vaciar carrito</button>
+        <p class="text-xs text-muted text-center">Aceptamos receta médica para medicamentos que lo requieran.</p>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    let cuponAplicado = 0;
+
+    function pintar() {
+      const carrito = obtenerCarrito();
+      const vacio = document.getElementById("carrito-vacio");
+      const lista = document.getElementById("carrito-lista");
+      const resumen = document.getElementById("carrito-resumen");
+
+      if (!carrito.length) {
+        vacio.classList.remove("hidden");
+        lista.innerHTML = "";
+        resumen.classList.add("hidden");
+        return;
+      }
+
+      vacio.classList.add("hidden");
+      resumen.classList.remove("hidden");
+
+      lista.innerHTML = carrito.map(it => `
+        <article class="bg-white border border-primary-100 rounded-2xl p-4 flex gap-4 reveal">
+          <a href="producto.html?id=${it.id}" class="w-24 h-24 rounded-xl overflow-hidden bg-primary-50 flex-shrink-0">
+            <img src="${it.imagen}" alt="${it.nombre}" class="w-full h-full object-cover" />
+          </a>
+          <div class="flex-1 min-w-0">
+            <a href="producto.html?id=${it.id}" class="font-semibold text-primary-900 hover:text-primary line-clamp-1">${it.nombre}</a>
+            ${it.recetaRequerida ? `<span class="inline-flex items-center gap-1 text-[11px] text-amber-700 mt-1">
+              <span class="material-symbols-outlined text-sm">description</span> Requiere receta
+            </span>` : ""}
+            <p class="text-lg font-bold text-primary mt-1">${formatearPrecio(it.precio)}</p>
+            <div class="mt-2 flex items-center gap-2">
+              <div class="inline-flex items-center border border-primary-100 rounded-lg overflow-hidden">
+                <button onclick="cambiarCantidad('${it.id}', ${it.cantidad - 1})" class="w-8 h-8 grid place-items-center hover:bg-primary-50 text-primary">−</button>
+                <span class="w-10 text-center text-sm">${it.cantidad}</span>
+                <button onclick="cambiarCantidad('${it.id}', ${it.cantidad + 1})" class="w-8 h-8 grid place-items-center hover:bg-primary-50 text-primary">+</button>
+              </div>
+              <button onclick="eliminarItem('${it.id}')" class="ml-auto text-xs text-red-600 hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">delete</span> Eliminar
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      const subtotal = carrito.reduce((a, it) => a + it.precio * it.cantidad, 0);
+      const envio = subtotal >= 40 ? 0 : 5;
+      const descuento = cuponAplicado > 0 ? subtotal * cuponAplicado : 0;
+      const total = subtotal + envio - descuento;
+
+      document.getElementById("r-subtotal").textContent = formatearPrecio(subtotal);
+      document.getElementById("r-envio").textContent = envio === 0 ? "Gratis" : formatearPrecio(envio);
+      document.getElementById("r-total").textContent = formatearPrecio(total);
+    }
+
+    function cambiarCantidad(id, cant) {
+      actualizarCantidadCarrito(id, cant);
+      pintar();
+    }
+
+    function eliminarItem(id) {
+      eliminarDelCarrito(id);
+      toast("Producto eliminado", "success");
+      pintar();
+    }
+
+    document.getElementById("vaciar").addEventListener("click", () => {
+      if (!confirm("¿Vaciar el carrito?")) return;
+      vaciarCarrito();
+      cuponAplicado = 0;
+      pintar();
+    });
+
+    document.getElementById("aplicar-cupon").addEventListener("click", () => {
+      const c = document.getElementById("cupon").value.trim().toUpperCase();
+      const msg = document.getElementById("cupon-msg");
+      if (c === "BIENVENIDO10") { cuponAplicado = 0.10; msg.textContent = "Cupón aplicado (10% OFF)"; msg.className = "text-xs text-accent mt-1"; }
+      else if (c === "") { cuponAplicado = 0; msg.textContent = ""; }
+      else { cuponAplicado = 0; msg.textContent = "Cupón no válido"; msg.className = "text-xs text-red-600 mt-1"; }
+      pintar();
+    });
+
+    pintar();
+  </script>
+</body>
+</html>

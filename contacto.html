@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto · FarmaSalud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <div data-header></div>
+
+  <main class="flex-1">
+
+    <section class="bg-gradient-to-br from-primary-50 to-white">
+      <div class="max-w-7xl mx-auto px-4 py-12 md:py-16 text-center reveal">
+        <p class="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Contacto</p>
+        <h1 class="mt-2 font-display text-3xl md:text-4xl text-primary-900">¿Cómo podemos ayudarte?</h1>
+        <p class="mt-3 max-w-xl mx-auto text-ink/80">Escríbenos o visítanos. Un farmacéutico te orientará sin compromiso.</p>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-4">
+      <div class="reveal bg-white border border-primary-100 rounded-2xl p-5 text-center hover:shadow-soft transition">
+        <span class="grid place-items-center mx-auto w-12 h-12 rounded-xl bg-primary text-white">
+          <span class="material-symbols-outlined">location_on</span>
+        </span>
+        <p class="mt-3 font-semibold">Visítanos</p>
+        <p class="text-sm text-muted mt-1">Av. Salud 245<br>Col. Centro</p>
+      </div>
+      <div class="reveal bg-white border border-primary-100 rounded-2xl p-5 text-center hover:shadow-soft transition">
+        <span class="grid place-items-center mx-auto w-12 h-12 rounded-xl bg-primary text-white">
+          <span class="material-symbols-outlined">call</span>
+        </span>
+        <p class="mt-3 font-semibold">Llámanos</p>
+        <p class="text-sm text-muted mt-1">+1 (555) 987-6543</p>
+      </div>
+      <div class="reveal bg-white border border-primary-100 rounded-2xl p-5 text-center hover:shadow-soft transition">
+        <span class="grid place-items-center mx-auto w-12 h-12 rounded-xl bg-primary text-white">
+          <span class="material-symbols-outlined">mail</span>
+        </span>
+        <p class="mt-3 font-semibold">Escríbenos</p>
+        <p class="text-sm text-muted mt-1">contacto@farmasalud.com</p>
+      </div>
+      <div class="reveal bg-white border border-primary-100 rounded-2xl p-5 text-center hover:shadow-soft transition">
+        <span class="grid place-items-center mx-auto w-12 h-12 rounded-xl bg-accent text-white">
+          <span class="material-symbols-outlined">chat</span>
+        </span>
+        <p class="mt-3 font-semibold">WhatsApp</p>
+        <p class="text-sm text-muted mt-1">+1 (555) 111-2233</p>
+      </div>
+    </section>
+
+    <!-- Form + Mapa -->
+    <section class="max-w-7xl mx-auto px-4 py-10 grid lg:grid-cols-2 gap-8">
+      <div class="reveal bg-white border border-primary-100 rounded-2xl p-6 md:p-8">
+        <h2 class="font-display text-2xl text-primary-900">Envíanos un mensaje</h2>
+        <p class="text-sm text-muted mt-1">Te respondemos en menos de 24h hábiles.</p>
+        <form id="contacto-form" class="mt-6 space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Nombre</label>
+              <input required name="nombre" class="input-field mt-1" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-wider text-muted font-semibold">Teléfono</label>
+              <input name="telefono" class="input-field mt-1" placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider text-muted font-semibold">Correo</label>
+            <input required name="email" type="email" class="input-field mt-1" placeholder="tu@correo.com" />
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider text-muted font-semibold">Asunto</label>
+            <select name="asunto" class="input-field mt-1">
+              <option>Consulta sobre un producto</option>
+              <option>Asesoría de dermocosmética</option>
+              <option>Soporte de pedido</option>
+              <option>Receta médica</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider text-muted font-semibold">Mensaje</label>
+            <textarea required name="mensaje" rows="5" class="input-field mt-1" placeholder="Cuéntanos cómo podemos ayudarte"></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Enviar mensaje</button>
+        </form>
+      </div>
+
+      <div class="space-y-6 reveal">
+        <div class="bg-primary-900 text-primary-100 rounded-2xl p-6">
+          <h2 class="font-display text-2xl text-white">Horario de atención</h2>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li class="flex justify-between border-b border-white/10 py-2"><span>Lunes a viernes</span><span class="font-semibold text-white">8:00 – 21:00</span></li>
+            <li class="flex justify-between border-b border-white/10 py-2"><span>Sábados</span><span class="font-semibold text-white">9:00 – 20:00</span></li>
+            <li class="flex justify-between border-b border-white/10 py-2"><span>Domingos</span><span class="font-semibold text-white">10:00 – 14:00</span></li>
+            <li class="flex justify-between py-2"><span>Festivos</span><span class="font-semibold text-white">Cerrado</span></li>
+          </ul>
+          <p class="mt-4 text-xs text-primary-200">
+            * Asesoría farmacéutica telefónica disponible en horario de apertura.
+          </p>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden border border-primary-100 aspect-[4/3] bg-primary-50">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-99.178%2C19.395%2C-99.140%2C19.420&layer=mapnik"
+            class="w-full h-full"
+            loading="lazy"
+            title="Ubicación FarmaSalud"></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    document.getElementById("contacto-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      toast("¡Mensaje enviado! Te contactaremos pronto.", "success");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

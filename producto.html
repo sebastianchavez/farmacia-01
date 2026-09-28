@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producto · FarmaSalud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <div data-header></div>
+
+  <main class="flex-1">
+
+    <div id="no-encontrado" class="hidden max-w-2xl mx-auto px-4 py-20 text-center">
+      <span class="material-symbols-outlined text-6xl text-muted">search_off</span>
+      <h1 class="mt-4 font-display text-2xl text-primary-900">Producto no encontrado</h1>
+      <p class="mt-2 text-muted">El producto que buscas no existe o fue retirado.</p>
+      <a href="productos.html" class="btn-primary mt-6">Ver catálogo</a>
+    </div>
+
+    <article id="detalle" class="hidden max-w-7xl mx-auto px-4 py-10">
+
+      <!-- breadcrumb -->
+      <nav class="text-xs text-muted mb-4">
+        <a href="index.html" class="hover:text-primary">Inicio</a>
+        <span class="mx-1">/</span>
+        <a href="productos.html" class="hover:text-primary">Productos</a>
+        <span class="mx-1">/</span>
+        <span id="bc-cat" class="text-primary-900"></span>
+      </nav>
+
+      <div class="grid md:grid-cols-2 gap-10">
+        <!-- gallery -->
+        <div class="reveal">
+          <div class="aspect-square rounded-3xl overflow-hidden bg-primary-50 border border-primary-100">
+            <img id="p-img" alt="" class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <!-- info -->
+        <div class="reveal">
+          <span id="p-cat" class="text-xs uppercase tracking-wider text-primary font-semibold"></span>
+          <h1 id="p-nombre" class="mt-2 font-display text-3xl md:text-4xl text-primary-900"></h1>
+
+          <div class="mt-3 flex items-center gap-3">
+            <span id="p-rating"></span>
+            <span id="p-num-resenas" class="text-sm text-muted"></span>
+          </div>
+
+          <p id="p-descripcion" class="mt-5 text-ink/80 leading-relaxed"></p>
+
+          <div id="p-receta-banner" class="hidden mt-5 p-4 bg-amber-50 border border-amber-200 rounded-xl flex gap-3">
+            <span class="material-symbols-outlined text-amber-600">description</span>
+            <div class="text-sm">
+              <p class="font-semibold text-amber-900">Requiere receta médica</p>
+              <p class="text-amber-800">Sube tu receta al finalizar el pedido. Un farmacéutico la validará en menos de 1h.</p>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+            <div class="bg-primary-50/40 rounded-xl p-3">
+              <p class="text-xs text-muted uppercase tracking-wider">Principio activo</p>
+              <p id="p-principio" class="font-semibold text-primary-900 mt-1"></p>
+            </div>
+            <div class="bg-primary-50/40 rounded-xl p-3">
+              <p class="text-xs text-muted uppercase tracking-wider">Presentación</p>
+              <p id="p-presentacion" class="font-semibold text-primary-900 mt-1"></p>
+            </div>
+            <div class="bg-primary-50/40 rounded-xl p-3">
+              <p class="text-xs text-muted uppercase tracking-wider">Laboratorio</p>
+              <p id="p-lab" class="font-semibold text-primary-900 mt-1"></p>
+            </div>
+            <div class="bg-primary-50/40 rounded-xl p-3">
+              <p class="text-xs text-muted uppercase tracking-wider">Stock</p>
+              <p id="p-stock" class="font-semibold text-primary-900 mt-1"></p>
+            </div>
+          </div>
+
+          <div class="mt-7 flex items-end gap-4">
+            <span id="p-precio" class="text-4xl font-bold text-primary"></span>
+          </div>
+
+          <div class="mt-6 flex items-center gap-3">
+            <div class="inline-flex items-center border border-primary-100 rounded-xl overflow-hidden">
+              <button id="qty-dec" class="w-10 h-10 grid place-items-center hover:bg-primary-50 text-primary">−</button>
+              <input id="qty" type="number" min="1" value="1" class="w-14 text-center border-x border-primary-100 py-2 focus:outline-none" />
+              <button id="qty-inc" class="w-10 h-10 grid place-items-center hover:bg-primary-50 text-primary">+</button>
+            </div>
+            <button id="add-cart" class="btn-primary flex-1 sm:flex-none">
+              <span class="material-symbols-outlined">add_shopping_cart</span>
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="mt-6 grid grid-cols-3 gap-3 text-xs text-muted">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">local_shipping</span> Envío 24-48h</div>
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">verified</span> Producto certificado</div>
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">assignment_return</span> Devolución 15 días</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <section class="mt-14 reveal">
+        <div class="flex gap-2 border-b border-primary-100 overflow-x-auto" id="tabs">
+          <button data-tab="desc" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-primary text-primary">Descripción</button>
+          <button data-tab="comp" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-muted hover:text-primary">Composición</button>
+          <button data-tab="env" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-muted hover:text-primary">Envío</button>
+          <button data-tab="res" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-muted hover:text-primary">Reseñas</button>
+        </div>
+
+        <div class="py-6">
+          <div data-pane="desc">
+            <p id="tab-desc" class="text-ink/80 leading-relaxed"></p>
+          </div>
+          <div data-pane="comp" class="hidden">
+            <ul class="space-y-2 text-sm">
+              <li class="flex justify-between border-b border-primary-50 py-2"><span class="text-muted">Principio activo</span><span id="tab-principio" class="font-semibold"></span></li>
+              <li class="flex justify-between border-b border-primary-50 py-2"><span class="text-muted">Presentación</span><span id="tab-presentacion" class="font-semibold"></span></li>
+              <li class="flex justify-between border-b border-primary-50 py-2"><span class="text-muted">Laboratorio</span><span id="tab-lab" class="font-semibold"></span></li>
+              <li class="flex justify-between border-b border-primary-50 py-2"><span class="text-muted">Requiere receta</span><span id="tab-receta" class="font-semibold"></span></li>
+            </ul>
+          </div>
+          <div data-pane="env" class="hidden">
+            <p class="text-ink/80 leading-relaxed">Envío estándar 3-5 días ($5), express 24-48h ($12) o recojo en tienda (gratis). Pedidos antes de las 16h salen el mismo día hábil.</p>
+          </div>
+          <div data-pane="res" class="hidden">
+            <div id="resumen-resenas" class="mb-6"></div>
+            <div id="lista-resenas" class="space-y-4"></div>
+            <div id="resena-cta" class="mt-8"></div>
+          </div>
+        </div>
+      </section>
+
+    </article>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    const id = obtenerQueryParam("id");
+    const producto = id ? obtenerProducto(id) : null;
+
+    if (!producto) {
+      document.getElementById("no-encontrado").classList.remove("hidden");
+    } else {
+      document.getElementById("detalle").classList.remove("hidden");
+      document.title = `${producto.nombre} · FarmaSalud`;
+
+      const cat = obtenerCategoria(producto.categoria);
+      document.getElementById("bc-cat").textContent = cat ? cat.nombre : "";
+      document.getElementById("p-cat").textContent = cat ? cat.nombre : "";
+      document.getElementById("p-nombre").textContent = producto.nombre;
+      document.getElementById("p-img").src = producto.imagen;
+      document.getElementById("p-img").alt = producto.nombre;
+      document.getElementById("p-descripcion").textContent = producto.descripcion;
+      document.getElementById("p-precio").textContent = formatearPrecio(producto.precio);
+      document.getElementById("p-principio").textContent = producto.principioActivo;
+      document.getElementById("p-presentacion").textContent = producto.presentacion;
+      document.getElementById("p-lab").textContent = producto.laboratorio;
+      document.getElementById("p-stock").textContent = producto.stock > 0 ? `${producto.stock} disponibles` : "Sin stock";
+
+      const rating = promedioRating(producto.id) || producto.rating || 0;
+      document.getElementById("p-rating").innerHTML = renderEstrellas(rating, "md");
+      const totalResenas = obtenerResenasProducto(producto.id).length;
+      document.getElementById("p-num-resenas").textContent = totalResenas ? `(${totalResenas} reseñas)` : "(sin reseñas)";
+
+      if (producto.recetaRequerida) document.getElementById("p-receta-banner").classList.remove("hidden");
+
+      // tabs
+      document.getElementById("tab-desc").textContent = producto.descripcion;
+      document.getElementById("tab-principio").textContent = producto.principioActivo;
+      document.getElementById("tab-presentacion").textContent = producto.presentacion;
+      document.getElementById("tab-lab").textContent = producto.laboratorio;
+      document.getElementById("tab-receta").textContent = producto.recetaRequerida ? "Sí" : "No";
+
+      // tabs handler
+      document.querySelectorAll("#tabs .tab-btn").forEach(b => {
+        b.addEventListener("click", () => {
+          document.querySelectorAll("#tabs .tab-btn").forEach(x => {
+            x.classList.remove("border-primary", "text-primary");
+            x.classList.add("border-transparent", "text-muted");
+          });
+          b.classList.add("border-primary", "text-primary");
+          b.classList.remove("border-transparent", "text-muted");
+          document.querySelectorAll("[data-pane]").forEach(p => p.classList.add("hidden"));
+          document.querySelector(`[data-pane="${b.dataset.tab}"]`).classList.remove("hidden");
+        });
+      });
+
+      // Cantidad
+      const qty = document.getElementById("qty");
+      document.getElementById("qty-inc").addEventListener("click", () => qty.value = Math.max(1, parseInt(qty.value || 1) + 1));
+      document.getElementById("qty-dec").addEventListener("click", () => qty.value = Math.max(1, parseInt(qty.value || 1) - 1));
+      document.getElementById("add-cart").addEventListener("click", () => {
+        const cant = Math.max(1, parseInt(qty.value || 1));
+        if (agregarAlCarrito(producto.id, cant)) toast("Producto agregado al carrito", "success");
+      });
+
+      // Reseñas
+      pintarResenas(producto.id);
+    }
+
+    function pintarResenas(productoId) {
+      const resenas = obtenerResenasProducto(productoId);
+      const dist = distribucionRating(productoId);
+      const total = resenas.length;
+      const promedio = total ? resenas.reduce((a, r) => a + r.rating, 0) / total : 0;
+
+      document.getElementById("resumen-resenas").innerHTML = `
+        <div class="bg-primary-50/40 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center">
+          <div class="text-center">
+            <p class="font-display text-5xl text-primary">${promedio.toFixed(1)}</p>
+            ${renderEstrellas(promedio, "md")}
+            <p class="text-xs text-muted mt-1">${total} reseña${total !== 1 ? "s" : ""}</p>
+          </div>
+          <div class="flex-1 w-full space-y-2">
+            ${[5,4,3,2,1].map(n => {
+              const c = dist[n-1];
+              const pct = total ? (c / total) * 100 : 0;
+              return `<div class="flex items-center gap-2 text-xs">
+                <span class="w-6 text-muted">${n}★</span>
+                <div class="flex-1 h-2 bg-primary-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400" style="width:${pct}%"></div>
+                </div>
+                <span class="w-8 text-right text-muted">${c}</span>
+              </div>`;
+            }).join("")}
+          </div>
+        </div>
+      `;
+
+      const lista = document.getElementById("lista-resenas");
+      if (!total) {
+        lista.innerHTML = `<p class="text-muted text-sm">Aún no hay reseñas. ¡Sé el primero en opinar!</p>`;
+      } else {
+        lista.innerHTML = resenas.map(r => `
+          <article class="border border-primary-100 rounded-xl p-4 bg-white">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-primary text-white grid place-items-center font-semibold text-sm">${r.usuario.split(" ").map(n=>n[0]).join("").slice(0,2)}</div>
+                <div>
+                  <p class="font-semibold text-sm">${r.usuario}</p>
+                  <p class="text-xs text-muted">${formatearFecha(r.fecha)}</p>
+                </div>
+              </div>
+              ${renderEstrellas(r.rating, "sm")}
+            </div>
+            <p class="mt-3 text-sm text-ink/80 leading-relaxed">${r.comentario}</p>
+          </article>
+        `).join("");
+      }
+
+      // CTA reseña
+      const sesion = obtenerSesion();
+      const cta = document.getElementById("resena-cta");
+      if (!sesion) {
+        cta.innerHTML = `<div class="p-4 bg-primary-50 rounded-xl text-sm text-primary-900">
+          <a href="login.html?redirect=producto.html?id=${productoId}" class="font-semibold underline">Inicia sesión</a> para dejar una reseña.
+        </div>`;
+      } else if (usuarioHaComprado(sesion.email, productoId)) {
+        cta.innerHTML = `<a href="resena.html?producto=${productoId}" class="btn-primary">Escribir reseña</a>`;
+      } else {
+        cta.innerHTML = `<div class="p-4 bg-primary-50 rounded-xl text-sm text-primary-900">
+          Solo los clientes que han comprado este producto pueden dejar reseña.
+        </div>`;
+      }
+    }
+  </script>
+</body>
+</html>

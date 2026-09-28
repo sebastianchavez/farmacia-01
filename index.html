@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FarmaSalud · Tu farmacia de confianza</title>
+  <meta name="description" content="FarmaSalud — medicamentos, dermocosmética, vitaminas y equipos médicos con entrega a domicilio y atención farmacéutica certificada." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/css/tailwind.config.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <div data-header></div>
+
+  <main class="flex-1">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-100">
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-primary-200 rounded-full blur-3xl opacity-40"></div>
+      <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-accent rounded-full blur-3xl opacity-20"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-xs font-medium shadow-soft">
+            <span class="material-symbols-outlined text-sm">verified</span>
+            Farmacéuticos certificados · Desde 1998
+          </span>
+          <h1 class="mt-5 font-display text-4xl md:text-5xl lg:text-6xl text-primary-900 leading-tight">
+            Tu salud, nuestra <span class="text-primary">prioridad</span>.
+          </h1>
+          <p class="mt-5 text-lg text-ink/80 max-w-xl">
+            Medicamentos, dermocosmética, vitaminas y equipos médicos con
+            atención cercana, receta digital y entrega a domicilio.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="productos.html" class="btn-primary">
+              <span class="material-symbols-outlined">shopping_bag</span>
+              Ver productos
+            </a>
+            <a href="contacto.html" class="btn-outline">
+              <span class="material-symbols-outlined">support_agent</span>
+              Asesoramiento
+            </a>
+          </div>
+          <div class="mt-10 grid grid-cols-3 gap-6 max-w-md">
+            <div>
+              <p class="font-display text-3xl text-primary">26+</p>
+              <p class="text-xs text-muted leading-snug">Años cuidando familias</p>
+            </div>
+            <div>
+              <p class="font-display text-3xl text-primary">12k</p>
+              <p class="text-xs text-muted leading-snug">Clientes felices</p>
+            </div>
+            <div>
+              <p class="font-display text-3xl text-primary">4.9 ★</p>
+              <p class="text-xs text-muted leading-snug">Calificación promedio</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative reveal">
+          <div class="aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-soft border-4 border-white">
+            <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80&auto=format&fit=crop"
+                 alt="Farmacéutica atendiendo a un cliente"
+                 class="w-full h-full object-cover" />
+          </div>
+          <!-- Floating badges -->
+          <div class="absolute -top-4 -left-4 bg-white rounded-2xl shadow-soft p-3 flex items-center gap-2 animate-float">
+            <span class="grid place-items-center w-9 h-9 rounded-xl bg-accent text-white">
+              <span class="material-symbols-outlined text-base">local_shipping</span>
+            </span>
+            <div class="text-xs">
+              <p class="font-semibold text-primary-900">Envío 24-48h</p>
+              <p class="text-muted">En pedidos antes 16h</p>
+            </div>
+          </div>
+          <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-soft p-3 flex items-center gap-2 animate-float" style="animation-delay:1.5s">
+            <span class="grid place-items-center w-9 h-9 rounded-xl bg-primary text-white">
+              <span class="material-symbols-outlined text-base">verified_user</span>
+            </span>
+            <div class="text-xs">
+              <p class="font-semibold text-primary-900">Receta digital</p>
+              <p class="text-muted">Aprobada en 1h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="bg-white border-y border-primary-100">
+      <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="flex items-center gap-3 reveal">
+          <span class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
+          <div class="text-sm"><p class="font-semibold">Envío a domicilio</p><p class="text-muted">Gratis sobre $40</p></div>
+        </div>
+        <div class="flex items-center gap-3 reveal">
+          <span class="material-symbols-outlined text-primary text-3xl">verified</span>
+          <div class="text-sm"><p class="font-semibold">Productos certificados</p><p class="text-muted">Laboratorios avalados</p></div>
+        </div>
+        <div class="flex items-center gap-3 reveal">
+          <span class="material-symbols-outlined text-primary text-3xl">support_agent</span>
+          <div class="text-sm"><p class="font-semibold">Asesoría farmacéutica</p><p class="text-muted">Lun-Sáb 8 a 21h</p></div>
+        </div>
+        <div class="flex items-center gap-3 reveal">
+          <span class="material-symbols-outlined text-primary text-3xl">credit_card</span>
+          <div class="text-sm"><p class="font-semibold">Pago seguro</p><p class="text-muted">Tarjeta, transferencia, efectivo</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+      <div class="text-center mb-10 reveal">
+        <p class="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Nuestras áreas</p>
+        <h2 class="mt-2 font-display text-3xl md:text-4xl text-primary-900">Encuentra lo que necesitas</h2>
+      </div>
+      <div id="categorias-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"></div>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <section class="bg-primary-50/40">
+      <div class="max-w-7xl mx-auto px-4 py-16">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 reveal">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Lo más popular</p>
+            <h2 class="mt-2 font-display text-3xl md:text-4xl text-primary-900">Productos destacados</h2>
+          </div>
+          <a href="productos.html" class="text-primary font-semibold inline-flex items-center gap-1 hover:underline">
+            Ver todos
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+        <div id="destacados-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- POR QUÉ FARMA -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="reveal">
+          <p class="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Por qué elegirnos</p>
+          <h2 class="mt-2 font-display text-3xl md:text-4xl text-primary-900">Salud con atención humana</h2>
+          <p class="mt-4 text-ink/80 leading-relaxed">
+            Más que una farmacia: un equipo de farmacéuticos, dermoconsejeros
+            y nutricionistas que te acompañan en cada decisión de salud.
+          </p>
+          <div class="mt-8 grid sm:grid-cols-2 gap-5">
+            <div class="flex gap-3">
+              <span class="grid place-items-center w-11 h-11 rounded-xl bg-primary-100 text-primary">
+                <span class="material-symbols-outlined">vaccines</span>
+              </span>
+              <div>
+                <p class="font-semibold">Receta digital</p>
+                <p class="text-sm text-muted">Validamos tu receta en menos de 1 hora.</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <span class="grid place-items-center w-11 h-11 rounded-xl bg-primary-100 text-primary">
+                <span class="material-symbols-outlined">spa</span>
+              </span>
+              <div>
+                <p class="font-semibold">Dermocosmética</p>
+                <p class="text-sm text-muted">Asesoría para tu tipo de piel.</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <span class="grid place-items-center w-11 h-11 rounded-xl bg-primary-100 text-primary">
+                <span class="material-symbols-outlined">monitor_heart</span>
+              </span>
+              <div>
+                <p class="font-semibold">Equipos médicos</p>
+                <p class="text-sm text-muted">Marcas certificadas con garantía.</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <span class="grid place-items-center w-11 h-11 rounded-xl bg-primary-100 text-primary">
+                <span class="material-symbols-outlined">favorite</span>
+              </span>
+              <div>
+                <p class="font-semibold">Atención cercana</p>
+                <p class="text-sm text-muted">Te escuchamos y resolvemos dudas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="aspect-[4/3] rounded-3xl overflow-hidden shadow-soft border-4 border-white">
+            <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=900&q=80&auto=format&fit=crop"
+                 alt="Productos farmacéuticos"
+                 class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="bg-primary-900 text-primary-100">
+      <div class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center mb-10 reveal">
+          <p class="text-xs uppercase tracking-[0.3em] text-accent-light font-semibold">Testimonios</p>
+          <h2 class="mt-2 font-display text-3xl md:text-4xl text-white">Lo que dicen nuestros clientes</h2>
+        </div>
+        <div id="testimonios-grid" class="grid md:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- CTA RECETA -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+      <div class="bg-gradient-to-r from-primary to-primary-700 rounded-3xl p-8 md:p-12 text-white shadow-soft reveal">
+        <div class="grid md:grid-cols-[1fr_auto] gap-6 items-center">
+          <div>
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-medium">
+              <span class="material-symbols-outlined text-sm">description</span>
+              Receta médica a domicilio
+            </span>
+            <h2 class="mt-4 font-display text-3xl md:text-4xl">¿Tienes una receta médica?</h2>
+            <p class="mt-3 text-primary-100 max-w-xl">
+              Sube tu receta al finalizar tu pedido y un farmacéutico la validará
+              en menos de 1 hora. Te entregamos tus medicamentos en la puerta de tu casa.
+            </p>
+          </div>
+          <a href="productos.html?cat=medicamentos" class="bg-white text-primary font-semibold px-6 py-3 rounded-xl hover:bg-primary-50 inline-flex items-center gap-2">
+            Ver medicamentos
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="max-w-3xl mx-auto px-4 py-12 text-center reveal">
+      <h2 class="font-display text-2xl md:text-3xl text-primary-900">Consejos de salud en tu correo</h2>
+      <p class="mt-2 text-ink/80">Recibe promociones, tips de bienestar y recordatorios.</p>
+      <form onsubmit="event.preventDefault(); toast('¡Gracias por suscribirte!','success'); this.reset();" class="mt-6 flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+        <input type="email" required placeholder="tu@correo.com" class="input-field flex-1" />
+        <button type="submit" class="btn-primary">Suscribirme</button>
+      </form>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <!-- Scripts -->
+  <script src="./js/data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    // Categorías
+    document.getElementById("categorias-grid").innerHTML = CATEGORIAS.map(c => `
+      <a href="productos.html?cat=${c.id}" class="reveal group bg-white border border-primary-100 rounded-2xl p-5 text-center hover:shadow-soft hover:border-primary transition">
+        <span class="grid place-items-center mx-auto w-14 h-14 rounded-2xl bg-primary-50 text-primary group-hover:bg-primary group-hover:text-white transition">
+          <span class="material-symbols-outlined text-3xl">${c.icono}</span>
+        </span>
+        <h3 class="mt-3 font-semibold text-primary-900">${c.nombre}</h3>
+        <p class="text-xs text-muted mt-1 line-clamp-2">${c.descripcion}</p>
+      </a>
+    `).join("");
+
+    // Destacados
+    const destacados = PRODUCTOS.filter(p => p.destacado).slice(0, 4);
+    document.getElementById("destacados-grid").innerHTML = destacados.map(renderProductoCard).join("");
+
+    // Testimonios
+    document.getElementById("testimonios-grid").innerHTML = TESTIMONIOS.map(t => `
+      <figure class="bg-white/5 border border-white/10 rounded-2xl p-6 reveal">
+        <div class="text-amber-400 text-lg">${renderEstrellas(t.rating)}</div>
+        <blockquote class="mt-3 text-primary-100 leading-relaxed">“${t.texto}”</blockquote>
+        <figcaption class="mt-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-accent grid place-items-center text-white font-semibold">${t.nombre.split(" ").map(n=>n[0]).join("")}</div>
+          <div class="text-sm">
+            <p class="font-semibold text-white">${t.nombre}</p>
+            <p class="text-primary-200">${t.ubicacion}</p>
+          </div>
+        </figcaption>
+      </figure>
+    `).join("");
+  </script>
+</body>
+</html>
