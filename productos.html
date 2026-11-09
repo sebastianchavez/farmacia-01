@@ -12,6 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="./assets/css/tailwind.config.js"></script>
   <link rel="stylesheet" href="./assets/css/styles.css" />
+<meta name="currency" content="CLP">
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -62,9 +63,9 @@
 
         <div>
           <p class="text-xs uppercase tracking-wider text-muted font-semibold">Precio máx.</p>
-          <input id="f-precio" type="range" min="0" max="60" step="1" value="60" class="w-full mt-2 accent-primary" />
+          <input id="f-precio" type="range" min="0" max="60000" step="1000" value="60000" class="w-full mt-2 accent-primary" />
           <div class="flex justify-between text-xs text-muted mt-1">
-            <span>$0</span><span id="f-precio-val">$60</span>
+            <span>$0</span><span id="f-precio-val">$60.000</span>
           </div>
         </div>
 
@@ -123,7 +124,7 @@
     const precioInput = document.getElementById("f-precio");
     const precioVal = document.getElementById("f-precio-val");
     precioInput.addEventListener("input", () => {
-      precioVal.textContent = "$" + precioInput.value;
+      precioVal.textContent = formatearPrecio(Number(precioInput.value));
       aplicarFiltros();
     });
 
@@ -135,8 +136,8 @@
       document.getElementById("f-buscar").value = "";
       document.querySelector('input[name="cat"][value=""]').checked = true;
       document.getElementById("f-receta").checked = false;
-      precioInput.value = 60;
-      precioVal.textContent = "$60";
+      precioInput.value = 60000;
+      precioVal.textContent = "$60.000";
       document.getElementById("orden").value = "relevancia";
       aplicarFiltros();
     });

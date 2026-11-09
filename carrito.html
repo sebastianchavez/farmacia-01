@@ -11,6 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="./assets/css/tailwind.config.js"></script>
   <link rel="stylesheet" href="./assets/css/styles.css" />
+<meta name="currency" content="CLP">
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -119,7 +120,7 @@
       `).join("");
 
       const subtotal = carrito.reduce((a, it) => a + it.precio * it.cantidad, 0);
-      const envio = subtotal >= 40 ? 0 : 5;
+      const envio = subtotal >= 40000 ? 0 : 5000;
       const descuento = cuponAplicado > 0 ? subtotal * cuponAplicado : 0;
       const total = subtotal + envio - descuento;
 

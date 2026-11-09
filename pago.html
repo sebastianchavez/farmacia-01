@@ -11,6 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="./assets/css/tailwind.config.js"></script>
   <link rel="stylesheet" href="./assets/css/styles.css" />
+<meta name="currency" content="CLP">
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -74,26 +75,26 @@
           <legend class="font-display text-xl text-primary-900 px-2">Tipo de envío</legend>
           <div class="mt-3 space-y-2">
             <label class="flex items-start gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
-              <input type="radio" name="envio" value="estandar" data-costo="5" data-label="Estándar (3-5 días)" checked class="mt-1 text-primary focus:ring-primary" />
+              <input type="radio" name="envio" value="estandar" data-costo="5000" data-label="Estándar (3-5 días)" checked class="mt-1 text-primary focus:ring-primary" />
               <div class="flex-1">
                 <p class="font-semibold">Estándar · 3-5 días hábiles</p>
-                <p class="text-xs text-muted">Envío por paquetería. Gratis en pedidos sobre $40.</p>
+                <p class="text-xs text-muted">Envío por paquetería. Gratis en pedidos sobre $40.000.</p>
               </div>
-              <span class="font-semibold text-primary">$5.00</span>
+              <span class="font-semibold text-primary">$5.000</span>
             </label>
             <label class="flex items-start gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
-              <input type="radio" name="envio" value="express" data-costo="12" data-label="Express (24-48h)" class="mt-1 text-primary focus:ring-primary" />
+              <input type="radio" name="envio" value="express" data-costo="12000" data-label="Express (24-48h)" class="mt-1 text-primary focus:ring-primary" />
               <div class="flex-1">
                 <p class="font-semibold">Express · 24-48h</p>
                 <p class="text-xs text-muted">Envío prioritario con seguimiento.</p>
               </div>
-              <span class="font-semibold text-primary">$12.00</span>
+              <span class="font-semibold text-primary">$12.000</span>
             </label>
             <label class="flex items-start gap-3 p-4 border border-primary-100 rounded-xl cursor-pointer hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-50/40">
               <input type="radio" name="envio" value="tienda" data-costo="0" data-label="Recojo en tienda" class="mt-1 text-primary focus:ring-primary" />
               <div class="flex-1">
                 <p class="font-semibold">Recojo en tienda</p>
-                <p class="text-xs text-muted">Av. Salud 245, Col. Centro. Horario de atención.</p>
+                <p class="text-xs text-muted">Av. Salud 245, Providencia. Horario de atención.</p>
               </div>
               <span class="font-semibold text-accent">Gratis</span>
             </label>
@@ -262,7 +263,7 @@
       const subtotal = carrito.reduce((a, it) => a + it.precio * it.cantidad, 0);
       const envioRadio = document.querySelector('input[name="envio"]:checked');
       let envio = parseFloat(envioRadio.dataset.costo);
-      if (envioRadio.value === "estandar" && subtotal >= 40) envio = 0;
+      if (envioRadio.value === "estandar" && subtotal >= 40000) envio = 0;
       const total = subtotal + envio;
 
       document.getElementById("p-subtotal").textContent = formatearPrecio(subtotal);
@@ -287,7 +288,7 @@
       const envioRadio = document.querySelector('input[name="envio"]:checked');
       const subtotal = carrito.reduce((a, it) => a + it.precio * it.cantidad, 0);
       let envio = parseFloat(envioRadio.dataset.costo);
-      if (envioRadio.value === "estandar" && subtotal >= 40) envio = 0;
+      if (envioRadio.value === "estandar" && subtotal >= 40000) envio = 0;
 
       const requiereReceta = carritoRequiereReceta();
       const recetaInput = document.getElementById("receta-input");

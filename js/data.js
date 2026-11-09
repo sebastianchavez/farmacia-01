@@ -47,7 +47,7 @@ const PRODUCTOS = [
     id: "p001",
     nombre: "Paracetamol 500mg",
     categoria: "medicamentos",
-    precio: 4.5,
+    precio: 4500,
     imagen:
       "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -64,7 +64,7 @@ const PRODUCTOS = [
     id: "p002",
     nombre: "Ibuprofeno 400mg",
     categoria: "medicamentos",
-    precio: 6.2,
+    precio: 6200,
     imagen:
       "https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -81,7 +81,7 @@ const PRODUCTOS = [
     id: "p003",
     nombre: "Amoxicilina 500mg",
     categoria: "medicamentos",
-    precio: 12.8,
+    precio: 12800,
     imagen:
       "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -98,7 +98,7 @@ const PRODUCTOS = [
     id: "p004",
     nombre: "Loratadina 10mg",
     categoria: "medicamentos",
-    precio: 7.9,
+    precio: 7900,
     imagen:
       "https://images.unsplash.com/photo-1576602976047-174e57a47881?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -117,7 +117,7 @@ const PRODUCTOS = [
     id: "p005",
     nombre: "Jabón Líquido Neutro 500ml",
     categoria: "cuidado-personal",
-    precio: 5.5,
+    precio: 5500,
     imagen:
       "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -134,7 +134,7 @@ const PRODUCTOS = [
     id: "p006",
     nombre: "Pasta Dental Triple Acción 150ml",
     categoria: "cuidado-personal",
-    precio: 3.8,
+    precio: 3800,
     imagen:
       "https://images.unsplash.com/photo-1559463564-4ee84a8c8f3d?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -151,7 +151,7 @@ const PRODUCTOS = [
     id: "p007",
     nombre: "Desodorante Roll-on 50ml",
     categoria: "cuidado-personal",
-    precio: 4.2,
+    precio: 4200,
     imagen:
       "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -170,7 +170,7 @@ const PRODUCTOS = [
     id: "p008",
     nombre: "Protector Solar FPS 50+ 60ml",
     categoria: "dermocosmetica",
-    precio: 18.9,
+    precio: 18900,
     imagen:
       "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -187,7 +187,7 @@ const PRODUCTOS = [
     id: "p009",
     nombre: "Crema Hidratante Facial 50ml",
     categoria: "dermocosmetica",
-    precio: 14.5,
+    precio: 14500,
     imagen:
       "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -204,7 +204,7 @@ const PRODUCTOS = [
     id: "p010",
     nombre: "Sérum Vitamina C 30ml",
     categoria: "dermocosmetica",
-    precio: 22.0,
+    precio: 22000,
     imagen:
       "https://images.unsplash.com/photo-1622445275576-721325763afe?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -223,7 +223,7 @@ const PRODUCTOS = [
     id: "p011",
     nombre: "Multivitamínico Adulto x60",
     categoria: "vitaminas",
-    precio: 15.9,
+    precio: 15900,
     imagen:
       "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -240,7 +240,7 @@ const PRODUCTOS = [
     id: "p012",
     nombre: "Vitamina D3 1000UI x30",
     categoria: "vitaminas",
-    precio: 9.5,
+    precio: 9500,
     imagen:
       "https://images.unsplash.com/photo-1559667326-26cf2d3f6f5d?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -257,7 +257,7 @@ const PRODUCTOS = [
     id: "p013",
     nombre: "Omega 3 1000mg x100",
     categoria: "vitaminas",
-    precio: 19.5,
+    precio: 19500,
     imagen:
       "https://images.unsplash.com/photo-1577400808258-6a05fdba8d56?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -276,7 +276,7 @@ const PRODUCTOS = [
     id: "p014",
     nombre: "Fórmula Infantil Etapa 1 400g",
     categoria: "bebe",
-    precio: 24.9,
+    precio: 24900,
     imagen:
       "https://images.unsplash.com/photo-1584650581263-b00a9ee0a48e?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -293,7 +293,7 @@ const PRODUCTOS = [
     id: "p015",
     nombre: "Crema Pañalitis 100g",
     categoria: "bebe",
-    precio: 7.5,
+    precio: 7500,
     imagen:
       "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -312,7 +312,7 @@ const PRODUCTOS = [
     id: "p016",
     nombre: "Tensiómetro Digital de Brazo",
     categoria: "equipos",
-    precio: 49.9,
+    precio: 49900,
     imagen:
       "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -329,7 +329,7 @@ const PRODUCTOS = [
     id: "p017",
     nombre: "Termómetro Infrarrojo",
     categoria: "equipos",
-    precio: 22.0,
+    precio: 22000,
     imagen:
       "https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -346,7 +346,7 @@ const PRODUCTOS = [
     id: "p018",
     nombre: "Glucómetro con 50 tiras reactivas",
     categoria: "equipos",
-    precio: 38.0,
+    precio: 38000,
     imagen:
       "https://images.unsplash.com/photo-1612531385446-f7e6d131e1d0?w=600&q=80&auto=format&fit=crop",
     descripcion:
@@ -501,21 +501,21 @@ const PEDIDOS_INICIALES = [
       {
         id: "p001",
         nombre: "Paracetamol 500mg",
-        precio: 4.5,
+        precio: 4500,
         cantidad: 2,
         imagen: PRODUCTOS[0].imagen,
       },
       {
         id: "p006",
         nombre: "Pasta Dental Triple Acción 150ml",
-        precio: 3.8,
+        precio: 3800,
         cantidad: 1,
         imagen: PRODUCTOS[5].imagen,
       },
     ],
-    subtotal: 12.8,
-    envio: 5.0,
-    total: 17.8,
+    subtotal: 12800,
+    envio: 5000,
+    total: 17800,
     tipoEnvio: "Estándar (3-5 días)",
     direccion: {
       nombre: "María López",
@@ -536,21 +536,21 @@ const PEDIDOS_INICIALES = [
       {
         id: "p008",
         nombre: "Protector Solar FPS 50+ 60ml",
-        precio: 18.9,
+        precio: 18900,
         cantidad: 1,
         imagen: PRODUCTOS[7].imagen,
       },
       {
         id: "p010",
         nombre: "Sérum Vitamina C 30ml",
-        precio: 22.0,
+        precio: 22000,
         cantidad: 1,
         imagen: PRODUCTOS[9].imagen,
       },
     ],
-    subtotal: 40.9,
-    envio: 12.0,
-    total: 52.9,
+    subtotal: 40900,
+    envio: 12000,
+    total: 52900,
     tipoEnvio: "Express (24-48h)",
     direccion: {
       nombre: "María López",
@@ -571,14 +571,14 @@ const PEDIDOS_INICIALES = [
       {
         id: "p016",
         nombre: "Tensiómetro Digital de Brazo",
-        precio: 49.9,
+        precio: 49900,
         cantidad: 1,
         imagen: PRODUCTOS[15].imagen,
       },
     ],
-    subtotal: 49.9,
-    envio: 0.0,
-    total: 49.9,
+    subtotal: 49900,
+    envio: 0,
+    total: 49900,
     tipoEnvio: "Recojo en tienda",
     direccion: {
       nombre: "Juan Pérez",
@@ -616,13 +616,13 @@ const USUARIOS_INICIALES = [
 // =========================== Helpers ===========================
 
 function formatearPrecio(precio) {
-  return `$${Number(precio).toFixed(2)}`;
+  return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(Number(precio));
 }
 
 function formatearFecha(fechaISO) {
   const f = new Date(fechaISO);
   if (isNaN(f)) return fechaISO;
-  return f.toLocaleDateString("es-ES", {
+  return f.toLocaleDateString("es-CL", {
     day: "2-digit",
     month: "long",
     year: "numeric",

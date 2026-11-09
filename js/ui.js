@@ -27,7 +27,7 @@ function renderHeader() {
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
       <span class="flex items-center gap-1.5">
         <span class="material-symbols-outlined text-sm">local_shipping</span>
-        Envío gratis en pedidos sobre $40
+        Envío gratis en pedidos sobre $40.000
       </span>
       <span class="hidden sm:flex items-center gap-1.5">
         <span class="material-symbols-outlined text-sm">verified</span>
@@ -163,15 +163,15 @@ function renderFooter() {
         <ul class="space-y-2 text-sm text-primary-200">
           <li class="flex items-start gap-2">
             <span class="material-symbols-outlined text-base mt-0.5">location_on</span>
-            Av. Salud 245, Col. Centro
+            Av. Salud 245, Providencia
           </li>
           <li class="flex items-start gap-2">
             <span class="material-symbols-outlined text-base mt-0.5">call</span>
-            +1 (555) 987-6543
+            +56 2 2345 6789
           </li>
           <li class="flex items-start gap-2">
             <span class="material-symbols-outlined text-base mt-0.5">mail</span>
-            contacto@farmasalud.com
+            contacto@farmasalud.cl
           </li>
           <li class="flex items-start gap-2">
             <span class="material-symbols-outlined text-base mt-0.5">schedule</span>
